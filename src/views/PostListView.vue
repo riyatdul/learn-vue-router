@@ -1,8 +1,10 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 
 const posts = ref([])
+const router = useRouter();
+const isLoggin = true;
 
 async function fetchPost(){
     const postUrl = 'https://jsonplaceholder.typicode.com/posts';
@@ -20,11 +22,20 @@ async function fetchPost(){
 }
 
 onMounted(fetchPost);
+
+//Route Guards
+router.beforeEach((to, _, next)=>{
+    if (to.meta.requiresAuth && !isLoggin) {
+        next('/sign-in')
+    } else {
+        next()
+    }
+});
 </script>
 
 <template>
     <h1>POST</h1>
-    <button @click="$router.push('/post-add')">Add Post</button>
+    <button @click="router.push('/post-add')">Add Post</button>
     <ul v-if="posts.length">
         <li v-for="post in posts" :key="post.id">
             <h2>{{ post.title }}</h2>
