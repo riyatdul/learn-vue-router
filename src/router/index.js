@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PostListView from '@/views/PostListView.vue'
 import PostDetailView from '@/views/PostDetailView.vue'
+import CreatePost from '@/views/CreatePost.vue'
+import NestedPage from '@/views/NestedPage.vue'
+import NestedOne from '@/views/NestedOne.vue'
+import NestedTwo from '@/views/NestedTwo.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,13 +26,34 @@ const router = createRouter({
     {
       path: '/posts',
       name: 'posts',
-      component: PostListView
+      component: PostListView,
     },
     {
       path: '/posts/:id',
       name: 'post',
-      component: PostDetailView
+      component: PostDetailView,
+    },
+    {
+      path: '/post-add',
+      name: 'post-add',
+      component: CreatePost,
+    },
+    {
+      path: '/nested',
+      name: 'nested',
+      component: NestedPage,
+      children:[
+        {
+          path: '/nested/one',
+          component: NestedOne
+        },
+        {
+          path: '/nested/two',
+          component: NestedTwo
+        }
+      ]
     }
+    
   ]
 })
 

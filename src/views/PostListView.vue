@@ -24,13 +24,16 @@ onMounted(fetchPost);
 
 <template>
     <h1>POST</h1>
+    <button @click="$router.push('/post-add')">Add Post</button>
     <ul v-if="posts.length">
         <li v-for="post in posts" :key="post.id">
             <h2>{{ post.title }}</h2>
             <h3>{{ post.body }}</h3>
-            <RouterLink :to="`/posts/${post.id}`" ><cite>More...</cite></RouterLink>
+            <RouterLink :to="`/posts/${post.id}`"><cite>More...</cite></RouterLink>
         </li>
     </ul>
+    <RouterView />
+
 </template>
 
 <style scoped>
