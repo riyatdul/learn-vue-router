@@ -6,6 +6,7 @@ import CreatePost from '@/views/CreatePost.vue'
 import NestedPage from '@/views/NestedPage.vue'
 import NestedOne from '@/views/NestedOne.vue'
 import NestedTwo from '@/views/NestedTwo.vue'
+import SignIn from '@/views/SignIn.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,7 @@ const router = createRouter({
       path: '/post-add',
       name: 'post-add',
       component: CreatePost,
+      meta: { requiresAuth: true },
     },
     {
       path: '/nested',
@@ -52,8 +54,12 @@ const router = createRouter({
           component: NestedTwo
         }
       ]
-    }
-    
+    },
+    {
+      path: '/sign-in',
+      name: 'sign-in',
+      component: SignIn,
+    },
   ]
 })
 
